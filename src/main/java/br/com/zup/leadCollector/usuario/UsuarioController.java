@@ -2,10 +2,8 @@ package br.com.zup.leadCollector.usuario;
 
 import br.com.zup.leadCollector.usuario.dtos.CadastroUsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/usuario")
@@ -15,8 +13,12 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping()
-    public Usuario cadastrarUsuario(@RequestBody CadastroUsuarioDTO cadastroUsuarioDTO){
+    @ResponseStatus(HttpStatus.CREATED)
+    public void cadastrarUsuario(@RequestBody CadastroUsuarioDTO cadastroUsuarioDTO){
+        Usuario usuario = new Usuario();
+        usuario.setEmail(cadastroUsuarioDTO.getEmail());
+        usuario.setSenha(cadastroUsuarioDTO.getSenha());
 
-        return usuarioService.salvarUsuario(cadastroUsuarioDTO);
+        usuarioService.salvarUsuario(usuario);
     }
 }
