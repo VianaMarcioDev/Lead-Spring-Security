@@ -1,5 +1,6 @@
 package br.com.zup.leadCollector.usuario;
 
+import br.com.zup.leadCollector.usuario.dtos.CadastroUsuarioDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +15,8 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @PostMapping()
-    public Usuario cadastrarUsuario(@RequestBody Usuario usuario){
-        return usuarioService.salvarUsuario(usuario);
+    public Usuario cadastrarUsuario(@RequestBody CadastroUsuarioDTO cadastroUsuarioDTO){
+
+        return usuarioService.salvarUsuario(cadastroUsuarioDTO);
     }
 }
