@@ -10,10 +10,12 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private BCryptPasswordEncoder encoder;
 
     public Usuario salvarUsuario(Usuario usuario){
         //Para encriptar senha do usuario no Banco de Dados
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
         String senhaEscondida = encoder.encode(usuario.getSenha());
 
         return usuarioRepository.save(usuario);
