@@ -10,6 +10,10 @@ public class LeadService {
     private LeadRepository leadRepository;
 
     public Lead salvarLead(Lead lead){
+    return leadRepository.save(lead);
+    }
 
+    public Iterable<Lead> exibirLeads() {
+        return leadRepository.findAll();
     }
 }

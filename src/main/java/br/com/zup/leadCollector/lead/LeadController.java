@@ -17,4 +17,9 @@ public class LeadController {
     public Lead cadastrarLead(@RequestBody Lead lead){
         return leadService.salvarLead(lead);
     }
+
+    @GetMapping
+    public Iterable<Lead> exibirTodosLeads(){
+        return leadService.exibirLeads();
+    }
 }
