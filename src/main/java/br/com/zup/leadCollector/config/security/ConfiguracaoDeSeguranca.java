@@ -10,10 +10,19 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class ConfiguracaoDeSeguranca extends WebSecurityConfigurerAdapter {
 
+
+    private static final String[] ENDPOINT_POST_PUBLICO = {
+            "/leads",
+            "/usuario"
+    };
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
+        http.csrf().disable();
+
         http.authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/leads")
+                .antMatchers(HttpMethod.POST, ENDPOINT_POST_PUBLICO)
                 .permitAll().anyRequest().authenticated();
     }
 }
