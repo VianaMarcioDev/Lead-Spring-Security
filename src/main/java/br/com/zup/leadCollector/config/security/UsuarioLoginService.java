@@ -17,8 +17,12 @@ public class UsuarioLoginService implements UserDetailsService {
     UsuarioRepository usuarioRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        Optional<Usuario> usuarioOptional = usuarioRepository.findByEmail();
-        return null;
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Optional<Usuario> usuarioOptional = usuarioRepository.findByEmail(email);
+        if (usuarioOptional.isEmpty()){
+            throw new UsernameNotFoundException("");
+        }
+        Usuario usuario = usuarioOptional.get();
+        return new UsuarioLogado (usuario.getEmail(), usuario.getSenha(), usuario.getId());
     }
 }
