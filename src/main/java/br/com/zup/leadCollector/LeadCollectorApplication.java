@@ -10,4 +10,5 @@ public class LeadCollectorApplication {
 		SpringApplication.run(LeadCollectorApplication.class, args);
 	}
 
+
 }

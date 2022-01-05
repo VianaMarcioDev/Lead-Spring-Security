@@ -3,6 +3,7 @@ package br.com.zup.leadCollector.config.security.JWT;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
@@ -12,8 +13,10 @@ import java.util.UUID;
 @Component
 public class JWTComponent {
 
-    private String segredo = "Xablau123";
-    private Long milissegundo = 60000L;
+    @Value("${jwt.segredo}")
+    private String segredo ;
+    @Value("${jwt.milissegundo}")
+    private Long milissegundo;
 
     public String gerarToken(String username, UUID id){
         Date vencimento = new Date(System.currentTimeMillis() + milissegundo);
